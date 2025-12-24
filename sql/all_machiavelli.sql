@@ -14,9 +14,12 @@ WHERE ModifierId IN (
     'MACHIAVELLI_GOLD_ACTION_REJECT'
 );
 
-UPDATE Modifiers
-SET ModifierType = 'MODIFIER_DIPLOMACY_AGENDA'
-WHERE ModifierId = 'ASHOKA_ALT_MOD_AGENDA_WITHOUT_REGRET';
+INSERT OR IGNORE INTO Modifiers
+    (ModifierId, ModifierType, NewOnly, OwnerRequirementSetId, OwnerStackLimit, Permanent, RunOnce, SubjectRequirementSetId, SubjectStackLimit)
+VALUES
+    ('ASHOKA_ALT_MOD_AGENDA_WITHOUT_REGRET',
+     'MODIFIER_DIPLOMACY_AGENDA',
+     0, NULL, NULL, 0, 0, NULL, NULL);
 
 INSERT INTO TraitModifiers (TraitType, ModifierId)
 SELECT
