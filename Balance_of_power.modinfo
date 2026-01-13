@@ -24,21 +24,71 @@
     <Mod id="age-modern" title="LOC_MODULE_AGE_MODERN_NAME"/>
   </Dependencies>
 
-  <ActionCriteria>
+    <ActionCriteria>
     <Criteria id="always">
       <AlwaysMet/>
     </Criteria>
+
+    <Criteria id="antiquity-only">
+      <AgeInUse>AGE_ANTIQUITY</AgeInUse>
+    </Criteria>
+
+    <Criteria id="exploration-only">
+      <AgeInUse>AGE_EXPLORATION</AgeInUse>
+    </Criteria>
+
+    <Criteria id="modern-only">
+      <AgeInUse>AGE_MODERN</AgeInUse>
+    </Criteria>
   </ActionCriteria>
 
+  
   <ActionGroups>
 
-    <ActionGroup id="all_machiavelli" scope="game" criteria="always">
+    <!-- Always-on SQL (core rules, shared tables, helpers, etc.) -->
+    <ActionGroup id="bop-core" scope="game" criteria="always">
       <Properties>
         <LoadOrder>1</LoadOrder>
       </Properties>
       <Actions>
         <UpdateDatabase>
-          <Item>sql/all_machiavelli.sql</Item>
+          <Item>sql/core.sql</Item>
+        </UpdateDatabase>
+      </Actions>
+    </ActionGroup>
+
+    <!-- Antiquity -->
+    <ActionGroup id="bop-antiquity" scope="game" criteria="antiquity-only">
+      <Properties>
+        <LoadOrder>2</LoadOrder>
+      </Properties>
+      <Actions>
+        <UpdateDatabase>
+          <Item>sql/antiquity.sql</Item>
+        </UpdateDatabase>
+      </Actions>
+    </ActionGroup>
+
+    <!-- Exploration -->
+    <ActionGroup id="bop-exploration" scope="game" criteria="exploration-only">
+      <Properties>
+        <LoadOrder>3</LoadOrder>
+      </Properties>
+      <Actions>
+        <UpdateDatabase>
+          <Item>sql/exploration.sql</Item>
+        </UpdateDatabase>
+      </Actions>
+    </ActionGroup>
+
+    <!-- Modern -->
+    <ActionGroup id="bop-modern" scope="game" criteria="modern-only">
+      <Properties>
+        <LoadOrder>4</LoadOrder>
+      </Properties>
+      <Actions>
+        <UpdateDatabase>
+          <Item>sql/modern.sql</Item>
         </UpdateDatabase>
       </Actions>
     </ActionGroup>
